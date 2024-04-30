@@ -15,12 +15,11 @@
 		50ADFFA42020D75100D50D53 /* Capacitor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50ADFFA52020D75100D50D53 /* Capacitor.framework */; };
 		50ADFFA82020EE4F00D50D53 /* DocumentScannerPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ADFFA72020EE4F00D50D53 /* DocumentScannerPlugin.m */; };
 		50E1A94820377CB70090CE1A /* DocumentScannerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E1A94720377CB70090CE1A /* DocumentScannerPlugin.swift */; };
-		541C18562BDB879C00A67877 /* DocScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541C18512BDB879C00A67877 /* DocScanner.swift */; };
-		541C18572BDB879C00A67877 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541C18522BDB879C00A67877 /* Errors.swift */; };
-		541C18582BDB879C00A67877 /* FileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541C18532BDB879C00A67877 /* FileUtil.swift */; };
-		541C18592BDB879C00A67877 /* ResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541C18542BDB879C00A67877 /* ResponseType.swift */; };
-		5436C7272BDBD58A00938829 /* CustomCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5436C7262BDBD58A00938829 /* CustomCameraViewController.swift */; };
-		5436C7282BDBD93100938829 /* CustomCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5436C7262BDBD58A00938829 /* CustomCameraViewController.swift */; };
+		5401F9642BE0D2020011DB32 /* CustomCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5401F95E2BE0D2020011DB32 /* CustomCameraViewController.swift */; };
+		5401F9652BE0D2020011DB32 /* DocScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5401F95F2BE0D2020011DB32 /* DocScanner.swift */; };
+		5401F9662BE0D2020011DB32 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5401F9602BE0D2020011DB32 /* Errors.swift */; };
+		5401F9672BE0D2020011DB32 /* FileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5401F9612BE0D2020011DB32 /* FileUtil.swift */; };
+		5401F9682BE0D2020011DB32 /* ResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5401F9622BE0D2020011DB32 /* ResponseType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,11 +43,11 @@
 		50ADFFA52020D75100D50D53 /* Capacitor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Capacitor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50ADFFA72020EE4F00D50D53 /* DocumentScannerPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DocumentScannerPlugin.m; sourceTree = "<group>"; };
 		50E1A94720377CB70090CE1A /* DocumentScannerPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentScannerPlugin.swift; sourceTree = "<group>"; };
-		541C18512BDB879C00A67877 /* DocScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocScanner.swift; sourceTree = "<group>"; };
-		541C18522BDB879C00A67877 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
-		541C18532BDB879C00A67877 /* FileUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtil.swift; sourceTree = "<group>"; };
-		541C18542BDB879C00A67877 /* ResponseType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseType.swift; sourceTree = "<group>"; };
-		5436C7262BDBD58A00938829 /* CustomCameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCameraViewController.swift; sourceTree = "<group>"; };
+		5401F95E2BE0D2020011DB32 /* CustomCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCameraViewController.swift; sourceTree = "<group>"; };
+		5401F95F2BE0D2020011DB32 /* DocScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocScanner.swift; sourceTree = "<group>"; };
+		5401F9602BE0D2020011DB32 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		5401F9612BE0D2020011DB32 /* FileUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtil.swift; sourceTree = "<group>"; };
+		5401F9622BE0D2020011DB32 /* ResponseType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseType.swift; sourceTree = "<group>"; };
 		5E23F77F099397094342571A /* Pods-Plugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plugin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Plugin/Pods-Plugin.debug.xcconfig"; sourceTree = "<group>"; };
 		91781294A431A2A7CC6EB714 /* Pods-Plugin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plugin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Plugin/Pods-Plugin.release.xcconfig"; sourceTree = "<group>"; };
 		96ED1B6440D6672E406C8D19 /* Pods-PluginTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PluginTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PluginTests/Pods-PluginTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -101,7 +100,7 @@
 		50ADFF8A201F53D600D50D53 /* Plugin */ = {
 			isa = PBXGroup;
 			children = (
-				541C18552BDB879C00A67877 /* DocScanner */,
+				5401F9632BE0D2020011DB32 /* DocScanner1 */,
 				50E1A94720377CB70090CE1A /* DocumentScannerPlugin.swift */,
 				50ADFF8B201F53D600D50D53 /* DocumentScannerPlugin.h */,
 				50ADFFA72020EE4F00D50D53 /* DocumentScannerPlugin.m */,
@@ -119,16 +118,16 @@
 			path = PluginTests;
 			sourceTree = "<group>";
 		};
-		541C18552BDB879C00A67877 /* DocScanner */ = {
+		5401F9632BE0D2020011DB32 /* DocScanner1 */ = {
 			isa = PBXGroup;
 			children = (
-				541C18512BDB879C00A67877 /* DocScanner.swift */,
-				541C18522BDB879C00A67877 /* Errors.swift */,
-				541C18532BDB879C00A67877 /* FileUtil.swift */,
-				541C18542BDB879C00A67877 /* ResponseType.swift */,
-				5436C7262BDBD58A00938829 /* CustomCameraViewController.swift */,
+				5401F95E2BE0D2020011DB32 /* CustomCameraViewController.swift */,
+				5401F95F2BE0D2020011DB32 /* DocScanner.swift */,
+				5401F9602BE0D2020011DB32 /* Errors.swift */,
+				5401F9612BE0D2020011DB32 /* FileUtil.swift */,
+				5401F9622BE0D2020011DB32 /* ResponseType.swift */,
 			);
-			path = DocScanner;
+			path = DocScanner1;
 			sourceTree = "<group>";
 		};
 		8C8E7744173064A9F6D438E3 /* Pods */ = {
@@ -327,13 +326,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5401F9642BE0D2020011DB32 /* CustomCameraViewController.swift in Sources */,
+				5401F9662BE0D2020011DB32 /* Errors.swift in Sources */,
 				50E1A94820377CB70090CE1A /* DocumentScannerPlugin.swift in Sources */,
-				541C18572BDB879C00A67877 /* Errors.swift in Sources */,
-				541C18582BDB879C00A67877 /* FileUtil.swift in Sources */,
+				5401F9672BE0D2020011DB32 /* FileUtil.swift in Sources */,
 				50ADFFA82020EE4F00D50D53 /* DocumentScannerPlugin.m in Sources */,
-				541C18562BDB879C00A67877 /* DocScanner.swift in Sources */,
-				541C18592BDB879C00A67877 /* ResponseType.swift in Sources */,
-				5436C7272BDBD58A00938829 /* CustomCameraViewController.swift in Sources */,
+				5401F9652BE0D2020011DB32 /* DocScanner.swift in Sources */,
+				5401F9682BE0D2020011DB32 /* ResponseType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,7 +340,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5436C7282BDBD93100938829 /* CustomCameraViewController.swift in Sources */,
 				50ADFF97201F53D600D50D53 /* DocumentScannerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
