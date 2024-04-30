@@ -3,7 +3,6 @@ import AVFoundation
 
 class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, AVCapturePhotoCaptureDelegate {
     
-    var imagePicker: UIImagePickerController!
     var capturedImages: [UIImage] = []
     var completionHandler: (([String]) -> Void)?
     var collectionView: UICollectionView!
@@ -12,25 +11,22 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
     var photoOutput: AVCapturePhotoOutput!
+    var shutterButton: UIButton!
+    var doneButton: UIButton!
+    var deleteButton: UIButton!
+    
+    var lastKnownDeviceOrientation: UIDeviceOrientation = .portrait
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground;
+        view.backgroundColor = .systemBackground
         view.frame = UIScreen.main.bounds
-//        setupImagePicker()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleDeviceOrientationChange), name: UIDevice.orientationDidChangeNotification, object: nil)
+
         setupCaptureSession()
         setupCollectionView()
         setupButtons()
-    }
-
-    private func setupImagePicker() {
-        imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .camera
-        imagePicker.allowsEditing = false
-        imagePicker.showsCameraControls = false // We are using custom controls
-        
-//        configureOverlay()
     }
     
     private func setupCaptureSession() {
@@ -66,57 +62,6 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         }
     }
 
-    
-//    private func configureOverlay() {
-//        overlayView = UIView(frame: imagePicker.view.bounds)
-//        overlayView.backgroundColor = .clear
-//
-//        // Increase the padding height to move the camera preview as low as before
-//        let paddingHeight: CGFloat = 100 // Increase padding to push the camera view down
-//        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: overlayView.bounds.width, height: paddingHeight))
-//        paddingView.backgroundColor = .black
-//        overlayView.addSubview(paddingView)
-//
-//        // "Done" button at the top of the overlay
-//        let finishButton = UIButton(type: .system)
-//        finishButton.frame = CGRect(x: overlayView.bounds.width - 100 - 20,
-//                                    y: 20, // Positioned at the top, above the camera preview
-//                                    width: 100,
-//                                    height: 50)
-//        finishButton.setTitle("Done", for: .normal)
-//        finishButton.titleLabel?.font = .systemFont(ofSize: 18, weight: .medium)
-//        finishButton.tintColor = .systemBlue
-//        finishButton.addTarget(self, action: #selector(capturePhoto), for: .touchUpInside)
-//        overlayView.addSubview(finishButton)
-//
-//        // "Shutter" button adjusted higher relative to the bottom of the view
-//        let shutterButtonSize: CGFloat = 70
-//        let shutterButton = UIButton(type: .system)
-//        shutterButton.frame = CGRect(x: (overlayView.bounds.width - shutterButtonSize) / 2,
-//                                     y: overlayView.bounds.height - shutterButtonSize - 30, // Adjusted for ergonomic reach
-//                                     width: shutterButtonSize,
-//                                     height: shutterButtonSize)
-//        shutterButton.setTitle("Take", for: .normal)
-//        shutterButton.titleLabel?.font = .systemFont(ofSize: 14)
-//        shutterButton.tintColor = .white
-//        shutterButton.layer.cornerRadius = shutterButtonSize / 2
-//        shutterButton.backgroundColor = UIColor(white: 1, alpha: 0.5)
-//        shutterButton.layer.borderWidth = 2
-//        shutterButton.layer.borderColor = UIColor.white.cgColor
-//        shutterButton.addTarget(self, action: #selector(capturePhoto), for: .touchUpInside)
-//        overlayView.addSubview(shutterButton)
-//
-//        imagePicker.cameraOverlayView = overlayView
-//    }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait // This locks the view controller to portrait mode
-    }
-    
-    override var shouldAutorotate: Bool {
-        return false
-    }
-
     private func setupCollectionView() {
             let layout = UICollectionViewFlowLayout()
             layout.scrollDirection = .horizontal
@@ -140,7 +85,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             cancelButton.addTarget(self, action: #selector(finishCapturing), for: .touchUpInside)
             view.addSubview(cancelButton)
         
-            let doneButton = UIButton(type: .system)
+            doneButton = UIButton(type: .system)
             doneButton.frame = CGRect(x: view.bounds.width - 100, y: 0, width: 100, height: 50)
             doneButton.setTitle("Done", for: .normal)
             doneButton.titleLabel?.font = .systemFont(ofSize: 18, weight: .medium)
@@ -148,10 +93,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             doneButton.addTarget(self, action: #selector(finishCapturing), for: .touchUpInside)
             view.addSubview(doneButton)
 
-            let shutterButton = UIButton(type: .system)
+            shutterButton = UIButton(type: .system)
             shutterButton.frame = CGRect(x: (view.bounds.width - 70) / 2, y: collectionView.frame.maxY + 5, width: 70, height: 70)
-            shutterButton.setTitle("Take", for: .normal)
-            shutterButton.titleLabel?.font = .systemFont(ofSize: 14)
+//            shutterButton.setTitle("Take", for: .normal)
+//            shutterButton.titleLabel?.font = .systemFont(ofSize: 14)
             shutterButton.tintColor = .white
             shutterButton.backgroundColor = UIColor(white: 1, alpha: 0.5)
             shutterButton.layer.cornerRadius = 35
@@ -207,7 +152,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         previewVC.view.addSubview(cancelButton)
 
         // Setup the delete button at the top
-        let deleteButton = UIButton(type: .system)
+        deleteButton = UIButton(type: .system)
         deleteButton.frame = CGRect(x: view.bounds.width - 100, y: 0, width: 100, height: 50) // Adjust Y position as needed
         deleteButton.setTitle("Delete", for: .normal)
         deleteButton.titleLabel?.font = .systemFont(ofSize: 18,  weight: .medium)
@@ -261,67 +206,6 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         imageView.frame = cell.contentView.bounds
         return cell
     }
-
-//    func presentCamera() {
-//        imagePicker.modalPresentationStyle = .fullScreen
-//        present(imagePicker, animated: true, completion: nil)
-//    }
-
-//    @objc func capturePhoto() {
-//        // Use the image picker to capture a photo
-//        imagePicker.takePicture()
-//    }
-    
-    func correctImageOrientation(_ image: UIImage) -> UIImage {
-        if image.imageOrientation == .up {
-            return image
-        }
-        
-        UIGraphicsBeginImageContextWithOptions(image.size, false, image.scale)
-        image.draw(in: CGRect(origin: CGPoint.zero, size: image.size))
-        let normalizedImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        
-        return normalizedImage
-    }
-
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard let image = info[.originalImage] as? UIImage else { return }
-        let correctedImage = correctImageOrientation(image)
-//        capturedImages.append(correctedImage)
-
-        // Update the UI without dismissing the UIImagePickerController
-        showReviewForImage(correctedImage, on: picker)
-//        collectionView.reloadData()
-    }
-
-    private func showReviewForImage(_ image: UIImage, on picker: UIImagePickerController) {
-        let reviewVC = UIViewController()
-        reviewVC.view.backgroundColor = .black
-        
-        let imageView = UIImageView(image: image)
-        imageView.frame = reviewVC.view.bounds
-        imageView.contentMode = .scaleAspectFit
-        reviewVC.view.addSubview(imageView)
-
-        let useButton = UIButton(type: .system)
-        useButton.frame = CGRect(x: 20, y: reviewVC.view.bounds.height - 80, width: 100, height: 50)
-        useButton.setTitle("Use Photo", for: .normal)
-        useButton.titleLabel?.font = .systemFont(ofSize: 18)
-        useButton.tintColor = .systemBlue
-        useButton.addTarget(self, action: #selector(usePhoto), for: .touchUpInside)
-        reviewVC.view.addSubview(useButton)
-
-        let retakeButton = UIButton(type: .system)
-        retakeButton.frame = CGRect(x: 200, y: reviewVC.view.bounds.height - 80, width: 100, height: 50)
-        retakeButton.setTitle("Retake", for: .normal)
-        retakeButton.titleLabel?.font = .systemFont(ofSize: 18)
-        retakeButton.tintColor = .systemRed
-        retakeButton.addTarget(self, action: #selector(retakePhoto), for: .touchUpInside)
-        reviewVC.view.addSubview(retakeButton)
-
-        picker.pushViewController(reviewVC, animated: true)
-    }
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         if let error = error {
@@ -329,47 +213,135 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             return
         }
         
-        // Extract image data from the photo object
         guard let imageData = photo.fileDataRepresentation() else {
             print("Could not obtain image data from photo object")
             return
         }
         
-        // Convert the image data to a UIImage and append it to your capturedImages array
         if let image = UIImage(data: imageData) {
-            capturedImages.append(image)
+            let orientedImage = correctImageOrientation(image, orientation: lastKnownDeviceOrientation)
+            capturedImages.append(orientedImage)
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
         }
     }
 
-
-    @objc func usePhoto() {
-        if let topVC = imagePicker.topViewController,
-           let imageView = topVC.view.subviews.compactMap({ $0 as? UIImageView }).first,
-           let image = imageView.image {
-            capturedImages.append(image)
-            collectionView.reloadData()
-            imagePicker.popViewController(animated: true)
+    func correctImageOrientation(_ image: UIImage, orientation: UIDeviceOrientation) -> UIImage {
+        var imageOrientation: UIImage.Orientation = .up
+        switch orientation {
+        case .portrait:
+            imageOrientation = .right
+        case .portraitUpsideDown:
+            imageOrientation = .left
+        case .landscapeLeft:
+            imageOrientation = .up // assuming the camera button is on the right
+        case .landscapeRight:
+            imageOrientation = .down // assuming the camera button is on the right
+        default:
+            break
         }
-    }
-
-    @objc func retakePhoto() {
-        imagePicker.popViewController(animated: true)
+        
+        guard let cgImage = image.cgImage else { return image }
+        return UIImage(cgImage: cgImage, scale: 1.0, orientation: imageOrientation)
     }
 
     @objc func finishCapturing() {
         let base64Images = capturedImages.map { image -> String? in
-                let correctedImage = correctImageOrientation(image)
-                guard let imageData = correctedImage.jpegData(compressionQuality: 0.8) else { return nil }
+//                let correctedImage = correctImageOrientation(image)
+                guard let imageData = image.jpegData(compressionQuality: 0.8) else { return nil }
                 return imageData.base64EncodedString()
             }
             completionHandler?(base64Images.compactMap { $0 })
             dismiss(animated: true, completion: nil)
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
 
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
+        coordinator.animate(alongsideTransition: { [weak self] _ in
+            guard let strongSelf = self else { return }
+            let orientation = UIDevice.current.orientation
+            strongSelf.updateLayoutForOrientation(orientation)
+        }, completion: nil)
     }
+    
+    @objc func handleDeviceOrientationChange() {
+        let orientation = UIDevice.current.orientation
+        if orientation.isFlat || !orientation.isValidInterfaceOrientation {
+            return
+        }
+        lastKnownDeviceOrientation = orientation
+    }
+
+    func updateLayoutForOrientation(_ orientation: UIDeviceOrientation) {
+        switch orientation {
+        case .portrait:
+            resetTransforms()
+        case .landscapeRight:
+            applyLandscapeTransform(clockwise: true)
+        case .landscapeLeft:
+            applyLandscapeTransform(clockwise: false)
+        default:
+            break
+        }
+    }
+
+    func resetTransforms() {
+        // Reset transformations and position all elements for portrait
+        
+        previewLayer.transform = CATransform3DIdentity
+        previewLayer.frame = CGRect(x: 0, y: 50, width: view.bounds.width, height: view.bounds.height * 0.70)
+        
+        collectionView.transform = CGAffineTransform.identity
+        collectionView.frame = CGRect(x: 0, y: previewLayer.frame.maxY + 5, width: view.bounds.width, height: 60)
+
+
+        if let deleteButton = deleteButton {
+            deleteButton.frame = CGRect(x: view.bounds.width - 100, y: 0, width: 100, height: 50)
+        }
+        doneButton.frame = CGRect(x: view.bounds.width - 100, y: 0, width: 100, height: 50)
+        shutterButton.transform = CGAffineTransform.identity
+        shutterButton.frame = CGRect(x: (view.bounds.width - 70) / 2, y: collectionView.frame.maxY + 5, width: 70, height: 70)
+    }
+
+    func applyLandscapeTransform(clockwise: Bool) {
+        let rotation = clockwise ? CGFloat.pi / 2 : -CGFloat.pi / 2
+
+        // Calculate the center of the preview layer before transformation
+        let originalCenter = CGPoint(x: previewLayer.bounds.midX, y: previewLayer.bounds.midY)
+
+        // Rotate the preview layer
+        previewLayer.transform = CATransform3DMakeRotation(rotation, 0, 0, 1)
+
+        // Adjust the frame of the previewLayer after rotation
+        let newWidth = view.bounds.width * 0.65  // Since original height is view.bounds.width * 0.65 in portrait
+        let newHeight = view.bounds.height
+        previewLayer.frame = CGRect(
+            x: 130,
+            y: 0,
+            width: newWidth,
+            height: newHeight
+        )
+
+        // Adjust collectionView for landscape
+        collectionView.transform = CGAffineTransform(rotationAngle: rotation)
+            collectionView.frame = CGRect(
+                x: 60,  // Start from the left edge
+                y: 50,  // Give some space from the top
+                width: 60,  // Keep width constant
+                height: view.bounds.height - 60  // Height as the rotated width of previewLayer
+            )
+        
+        if let deleteButton = deleteButton {
+            deleteButton.frame = CGRect(x: view.bounds.width - 100, y: 0, width: 100, height: 50)
+        }
+        
+        doneButton.frame = CGRect(x: view.bounds.width - 100, y: 0, width: 100, height: 50)
+        shutterButton.transform = CGAffineTransform(rotationAngle: rotation)
+        shutterButton.center = CGPoint(x: view.bounds.width - 85, y: view.bounds.height / 2)  // Right side
+
+
+    }
+
 }
