@@ -1,7 +1,7 @@
 {
-  "name": "capacitor-document-scanner",
-  "version": "2.0.0",
-  "description": "A Capacitor plugin that lets you scan documents using Android and iOS",
+  "name": "capacitor-document-scanner-mod",
+  "version": "1.0.0",
+  "description": "A Capacitor plugin that lets you scan documents or take full pictures using Android and iOS (webbeaver plugin mod)",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
@@ -17,10 +17,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WebsiteBeaver/capacitor-document-scanner.git"
+    "url": "git+https://github.com/Church1ll/document-scanner-plugin.git"
   },
   "bugs": {
-    "url": "https://github.com/WebsiteBeaver/capacitor-document-scanner/issues"
+    "url": "https://github.com/Church1ll/document-scanner-plugin/issues"
   },
   "keywords": [
     "capacitor",
