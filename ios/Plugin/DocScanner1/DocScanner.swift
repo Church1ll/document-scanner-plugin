@@ -1,11 +1,6 @@
 import UIKit
 import VisionKit
 
-
-public enum ScanMode {
-  case scanDocument
-  case takeFullPicture
-}
 /**
  This class uses VisonKit to start a document scan. It either returns the cropped images in base64 or as file paths
  depending on the configuration.
@@ -31,7 +26,7 @@ public class DocScanner: NSObject, VNDocumentCameraViewControllerDelegate {
     /** @property  croppedImageQuality the 0 - 100 quality of the cropped image */
     private var croppedImageQuality: Int
     
-    private var scanMode: ScanMode
+    private var scanMode: String
         
     private var capturedImages: [UIImage] = []
     
@@ -54,7 +49,7 @@ public class DocScanner: NSObject, VNDocumentCameraViewControllerDelegate {
         cancelHandler: @escaping () -> Void = {},
         responseType: String = ResponseType.imageFilePath,
         croppedImageQuality: Int = 100,
-        scanMode: ScanMode = .takeFullPicture
+        scanMode: String = ScanMode.scanDocument
     ) {
         self.viewController = viewController
         self.successHandler = successHandler
@@ -85,14 +80,14 @@ public class DocScanner: NSObject, VNDocumentCameraViewControllerDelegate {
         }
         
         switch scanMode {
-        case .scanDocument:
+        case ScanMode.scanDocument:
             DispatchQueue.main.async {
                 // launch the document scanner
                 let documentCameraViewController = VNDocumentCameraViewController()
                 documentCameraViewController.delegate = self
                 self.viewController?.present(documentCameraViewController, animated: true)
             }
-        case .takeFullPicture:
+        case ScanMode.takeFullPicture:
             if let viewController = viewController {
                 DispatchQueue.main.async {
                     let cameraVC = CameraViewController()
@@ -107,6 +102,9 @@ public class DocScanner: NSObject, VNDocumentCameraViewControllerDelegate {
                     })
                 }
             }
+        default:
+            // Handle any other cases not explicitly mentioned
+            print("An unhandled scan mode was selected")
         }
     }
     
@@ -126,7 +124,8 @@ public class DocScanner: NSObject, VNDocumentCameraViewControllerDelegate {
         errorHandler: @escaping (String) -> Void = {_ in },
         cancelHandler: @escaping () -> Void = {},
         responseType: String? = ResponseType.imageFilePath,
-        croppedImageQuality: Int? = 100
+        croppedImageQuality: Int? = 100,
+        scanMode: String? = ScanMode.scanDocument
     ) {
         self.viewController = viewController
         self.successHandler = successHandler
@@ -134,7 +133,7 @@ public class DocScanner: NSObject, VNDocumentCameraViewControllerDelegate {
         self.cancelHandler = cancelHandler
         self.responseType = responseType ?? ResponseType.imageFilePath
         self.croppedImageQuality = croppedImageQuality ?? 100
-        
+        self.scanMode = scanMode ?? ScanMode.scanDocument
         self.startScan()
     }
     

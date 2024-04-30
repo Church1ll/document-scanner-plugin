@@ -32,7 +32,7 @@ export interface ScanDocumentOptions {
     /**
      * Specify the mode of scanning. Only works in iOS. On Android it is ignored.
      */
-    scanMode?: "scanDocument" | "takeFullPicture";
+    scanMode?: 'scanDocument' | 'takeFullPicture';
 }
 export declare enum ResponseType {
     /**

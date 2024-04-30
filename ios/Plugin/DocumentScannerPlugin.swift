@@ -38,7 +38,8 @@ public class DocumentScannerPlugin: CAPPlugin {
                     "status": "cancel"
                 ])
             },
-            responseType: call.getString("responseType")
+            responseType: call.getString("responseType"),
+            scanMode: call.getString("scanMode")
         )
     }
 }

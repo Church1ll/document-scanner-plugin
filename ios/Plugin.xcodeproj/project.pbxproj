@@ -20,6 +20,7 @@
 		5401F9662BE0D2020011DB32 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5401F9602BE0D2020011DB32 /* Errors.swift */; };
 		5401F9672BE0D2020011DB32 /* FileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5401F9612BE0D2020011DB32 /* FileUtil.swift */; };
 		5401F9682BE0D2020011DB32 /* ResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5401F9622BE0D2020011DB32 /* ResponseType.swift */; };
+		5401F96A2BE116880011DB32 /* ScanMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5401F9692BE116880011DB32 /* ScanMode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		5401F9602BE0D2020011DB32 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		5401F9612BE0D2020011DB32 /* FileUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtil.swift; sourceTree = "<group>"; };
 		5401F9622BE0D2020011DB32 /* ResponseType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseType.swift; sourceTree = "<group>"; };
+		5401F9692BE116880011DB32 /* ScanMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanMode.swift; sourceTree = "<group>"; };
 		5E23F77F099397094342571A /* Pods-Plugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plugin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Plugin/Pods-Plugin.debug.xcconfig"; sourceTree = "<group>"; };
 		91781294A431A2A7CC6EB714 /* Pods-Plugin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plugin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Plugin/Pods-Plugin.release.xcconfig"; sourceTree = "<group>"; };
 		96ED1B6440D6672E406C8D19 /* Pods-PluginTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PluginTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PluginTests/Pods-PluginTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				5401F9602BE0D2020011DB32 /* Errors.swift */,
 				5401F9612BE0D2020011DB32 /* FileUtil.swift */,
 				5401F9622BE0D2020011DB32 /* ResponseType.swift */,
+				5401F9692BE116880011DB32 /* ScanMode.swift */,
 			);
 			path = DocScanner1;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				5401F9642BE0D2020011DB32 /* CustomCameraViewController.swift in Sources */,
 				5401F9662BE0D2020011DB32 /* Errors.swift in Sources */,
 				50E1A94820377CB70090CE1A /* DocumentScannerPlugin.swift in Sources */,
+				5401F96A2BE116880011DB32 /* ScanMode.swift in Sources */,
 				5401F9672BE0D2020011DB32 /* FileUtil.swift in Sources */,
 				50ADFFA82020EE4F00D50D53 /* DocumentScannerPlugin.m in Sources */,
 				5401F9652BE0D2020011DB32 /* DocScanner.swift in Sources */,
