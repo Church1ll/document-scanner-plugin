@@ -33,6 +33,11 @@ export interface ScanDocumentOptions {
    * @default: ResponseType.ImageFilePath
    */
   responseType?: ResponseType
+
+  /**
+   * Specify the mode of scanning. Only works in iOS. On Android it is ignored.
+   */
+  scanMode?: "scanDocument" | "takeFullPicture"
 }
 
 export enum ResponseType {
