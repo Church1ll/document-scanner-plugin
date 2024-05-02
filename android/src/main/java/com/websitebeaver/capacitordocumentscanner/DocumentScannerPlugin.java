@@ -8,8 +8,8 @@ import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.ActivityCallback;
 import com.getcapacitor.annotation.CapacitorPlugin;
-import com.websitebeaver.documentscanner.DocumentScanner;
-import com.websitebeaver.documentscanner.constants.DocumentScannerExtra;
+import io.github.church1ll.documentscannermod.DocumentScanner;
+import io.github.church1ll.documentscannermod.constants.DocumentScannerExtra;
 import java.util.ArrayList;
 
 /**
