@@ -249,11 +249,27 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     @objc func finishCapturing() {
         let base64Images = capturedImages.map { image -> String? in
 //                let correctedImage = correctImageOrientation(image)
-                guard let imageData = image.jpegData(compressionQuality: 0.8) else { return nil }
+                let normalizedImage = normalizeImageOrientation(image)
+                guard let imageData = normalizedImage.jpegData(compressionQuality: 0.8) else { return nil }
                 return imageData.base64EncodedString()
             }
             completionHandler?(base64Images.compactMap { $0 })
             dismiss(animated: true, completion: nil)
+    }
+    
+    func normalizeImageOrientation(_ image: UIImage) -> UIImage {
+        // Check if the image has default orientation
+        if image.imageOrientation == .up {
+            return image
+        }
+        
+        // Create a graphics context with the original image's dimensions and draw the image with default orientation
+        UIGraphicsBeginImageContextWithOptions(image.size, false, image.scale)
+        image.draw(in: CGRect(origin: .zero, size: image.size))
+        let normalizedImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        return normalizedImage
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
