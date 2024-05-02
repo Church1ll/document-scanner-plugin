@@ -1,6 +1,6 @@
 {
   "name": "capacitor-document-scanner-mod",
-  "version": "1.1.1",
+  "version": "1.1.5",
   "description": "A Capacitor plugin that lets you scan documents or take full pictures using Android and iOS (webbeaver plugin mod)",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -11,7 +11,7 @@
     "android/build.gradle",
     "dist/",
     "ios/Plugin/",
-    "CapacitorDocumentScanner.podspec"
+    "CapacitorDocumentScannerMod.podspec"
   ],
   "author": "David Marcus",
   "license": "MIT",
